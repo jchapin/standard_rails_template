@@ -1,11 +1,38 @@
+#
 # Core Gems
+#
+
+#
+# Authorization / Access Control
+#
 if yes?('Would you like to install Devise?')
+  # Authorization
   gem 'devise'
   generate 'devise:install'
   model_name = ask('What would you like the user model to be called? [User]')
   model_name = 'User' if model_name.blank?
   generate 'devise', model_name
+  generate 'devise:views' if yes?('Install Devise view files?')
+
+  # Access Control
+  acl = ask('Which ACL do you want? [1] = CanCan [2] = CanCanCan [3] = Pundit')
+  case acl
+  when '2'
+    gem 'cancancan', '~> 1.10'
+    generate 'cancan:ability'
+  when '3'
+    gem 'pundit'
+    generate 'pundit:install'
+  else
+    gem 'cancan'
+    generate 'cancan:ability'
+  end
 end
+
+# Setup Static Home Page
+generate 'controller', 'static home'
+route "root to: 'static#home'"
+gsub_file 'config/routes.rb', /^  get 'static\/home'$/, ''
 
 gem 'puma'
 gem 'jquery-rails'
@@ -26,8 +53,8 @@ gem_group :development do
   # The Bullet gem is designed to help you increase your application's
   # performance by reducing the number of queries it makes.
   gem 'bullet'
-  application(nil, env: "development") do
-    %{# Enable Bullet, turn on /log/bullet.log, add notifications to footer.
+  application(nil, env: 'development') do
+    %(# Enable Bullet, turn on /log/bullet.log, add notifications to footer.
   config.after_initialize do
     Bullet.enable        = true
     Bullet.bullet_logger = true
@@ -46,7 +73,7 @@ gem_group :development do
     # Bullet.rollbar      = true
     # Bullet.stacktrace_includes = [ 'your_gem', 'your_middleware' ]
     # Bullet.slack = { webhook_url: 'http://some.slack.url', foo: 'bar' }
-  end}
+  end)
   end
   # Used to view mail messages in a web browser without actually sending a
   # message through a mail server.
@@ -72,3 +99,6 @@ gem_group :test do
   gem 'vcr'
   gem 'webmock'
 end
+
+# Run
+rake 'db:migrate db:seed'
