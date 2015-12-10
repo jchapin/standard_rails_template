@@ -9,8 +9,33 @@ gem 'rails_12factor'
 gem 'twilio-ruby', '~> 4.1.0'
 
 gem_group :development do
-  # Used to find inefficient ActiveRecord queries.
+  # https://github.com/flyerhzm/bullet
+  #
+  # The Bullet gem is designed to help you increase your application's
+  # performance by reducing the number of queries it makes.
   gem 'bullet'
+  application(nil, env: "development") do
+    %{# Enable Bullet, turn on /log/bullet.log, add notifications to footer.
+  config.after_initialize do
+    Bullet.enable        = true
+    Bullet.bullet_logger = true
+    Bullet.add_footer    = true
+    # Bullet.alert       = true
+    # Bullet.console     = true
+    # Bullet.growl       = true
+    # Bullet.xmpp        = { :account  => 'bullets_account@jabber.org',
+    #                        :password => 'bullets_password_for_jabber',
+    #                        :receiver => 'your_account@jabber.org',
+    #                        :show_online_status => true }
+    # Bullet.rails_logger = true
+    # Bullet.honeybadger  = true
+    # Bullet.bugsnag      = true
+    # Bullet.airbrake     = true
+    # Bullet.rollbar      = true
+    # Bullet.stacktrace_includes = [ 'your_gem', 'your_middleware' ]
+    # Bullet.slack = { webhook_url: 'http://some.slack.url', foo: 'bar' }
+  end}
+  end
   # Used to view mail messages in a web browser without actually sending a
   # message through a mail server.
   gem 'letter_opener'
