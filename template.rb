@@ -1,12 +1,24 @@
-gem 'devise'
+# Core Gems
+if yes?('Would you like to install Devise?')
+  gem 'devise'
+  generate 'devise:install'
+  model_name = ask('What would you like the user model to be called? [User]')
+  model_name = 'User' if model_name.blank?
+  generate 'devise', model_name
+end
+
 gem 'puma'
-gem 'pg'
-gem 'twitter-bootstrap-rails'
 gem 'jquery-rails'
 gem 'jquery-turbolinks'
 gem 'turbolinks'
-gem 'rails_12factor'
-gem 'twilio-ruby', '~> 4.1.0'
+gem 'twilio-ruby'
+gem 'twitter-bootstrap-rails'
+
+# Heroku
+gem_group :production do
+  gem 'rails_12factor'
+  gem 'pg'
+end
 
 gem_group :development do
   # https://github.com/flyerhzm/bullet
