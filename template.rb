@@ -32,14 +32,19 @@ end
 # Setup Static Home Page
 generate 'controller', 'static home'
 route "root to: 'static#home'"
-gsub_file 'config/routes.rb', /^  get 'static\/home'$/, ''
+gsub_file 'config/routes.rb', /^  get 'static\/home'\n$/, ''
 
 gem 'puma'
 gem 'jquery-rails'
 gem 'jquery-turbolinks'
 gem 'turbolinks'
 gem 'twilio-ruby'
+
+# Twitter Bootstrap
+gem 'less-rails'
+gem 'therubyracer'
 gem 'twitter-bootstrap-rails'
+generate 'bootstrap:install less'
 
 # Heroku
 gem_group :production do
