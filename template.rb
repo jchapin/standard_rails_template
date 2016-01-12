@@ -34,6 +34,9 @@ generate 'controller', 'static home'
 route "root to: 'static#home'"
 gsub_file 'config/routes.rb', /^  get 'static\/home'\n$/, ''
 
+# Pagination
+gem 'kaminari'
+# HTTP server currently preferred by Heroku
 gem 'puma'
 gem 'jquery-rails'
 gem 'jquery-turbolinks'
@@ -45,6 +48,8 @@ gem 'less-rails'
 gem 'therubyracer'
 gem 'twitter-bootstrap-rails'
 generate 'bootstrap:install less'
+# Install Bootstrap 3 themed views into /app/views/kaminari
+generate 'kaminari:views bootstrap3'
 
 # Heroku
 gem_group :production do
