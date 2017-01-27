@@ -86,7 +86,6 @@ gem_group :development, :test do
   gsub_file 'Gemfile', /^gem 'sqlite3'\n/, ''
   # Add SQLite to development and test.
   gem 'sqlite3'
-  gem 'web-console', '~> 2.0'
 end
 
 gem_group :test do
