@@ -20,10 +20,6 @@ generate 'controller', 'static home'
 route "root to: 'static#home'"
 gsub_file 'config/routes.rb', /^  get 'static\/home'\n$/, ''
 
-
-gem 'jquery-turbolinks'
-gem 'turbolinks'
-
 # Twitter Bootstrap
 gem 'bootstrap', '~> 4.0.0.alpha6'
 # Pagination
