@@ -3,20 +3,17 @@
 #
 
 #
-# Authorization / Access Control
+# Authorization
 #
-if yes?('Would you like to install Devise?')
-  # Authorization
-  gem 'devise'
-  generate 'devise:install'
-  model_name = ask('What would you like the user model to be called? [User]')
-  model_name = 'User' if model_name.blank?
-  generate 'devise', model_name
-  generate 'devise:views' if yes?('Install Devise view files?')
-
-  gem 'pundit'
-  generate 'pundit:install'
-end
+gem 'devise'
+generate 'devise:install'
+model_name = ask('What would you like the user model to be called? [User]')
+model_name = 'User' if model_name.blank?
+generate 'devise', model_name
+generate 'devise:views' if yes?('Install Devise view files?')
+# Access Control
+gem 'pundit'
+generate 'pundit:install'
 
 # Setup Static Home Page
 generate 'controller', 'static home'
