@@ -33,8 +33,8 @@ gem 'twilio-ruby'
 
 # Twitter Bootstrap
 gem 'bootstrap', '~> 4.0.0.alpha6'
-# Install Bootstrap 3 themed views into /app/views/kaminari
-generate 'kaminari:views bootstrap3'
+# Genrate the default views from Kaminari
+generate 'kaminari:views default'
 
 # Heroku
 gem_group :production do
