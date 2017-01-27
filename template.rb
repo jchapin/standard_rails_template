@@ -28,6 +28,7 @@ gem 'kaminari'
 gem 'jquery-rails'
 gem 'jquery-turbolinks'
 gem 'turbolinks'
+# Twilio for SMS and Telephone Communication
 gem 'twilio-ruby'
 
 # Twitter Bootstrap
