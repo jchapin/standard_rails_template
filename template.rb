@@ -23,18 +23,20 @@ generate 'controller', 'static home'
 route "root to: 'static#home'"
 gsub_file 'config/routes.rb', /^  get 'static\/home'\n$/, ''
 
-# Pagination
-gem 'kaminari'
-gem 'jquery-rails'
+
 gem 'jquery-turbolinks'
 gem 'turbolinks'
-# Twilio for SMS and Telephone Communication
-gem 'twilio-ruby'
 
 # Twitter Bootstrap
 gem 'bootstrap', '~> 4.0.0.alpha6'
+# Pagination
+gem 'kaminari'
 # Genrate the default views from Kaminari
 generate 'kaminari:views default'
+# Ember - Front End Framework
+gem 'ember-rails'
+# Twilio for SMS and Telephone Communication
+gem 'twilio-ruby'
 
 # Heroku
 gem_group :production do
