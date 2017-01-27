@@ -25,8 +25,6 @@ gsub_file 'config/routes.rb', /^  get 'static\/home'\n$/, ''
 
 # Pagination
 gem 'kaminari'
-# HTTP server currently preferred by Heroku
-gem 'puma'
 gem 'jquery-rails'
 gem 'jquery-turbolinks'
 gem 'turbolinks'
