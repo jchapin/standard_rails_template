@@ -14,19 +14,8 @@ if yes?('Would you like to install Devise?')
   generate 'devise', model_name
   generate 'devise:views' if yes?('Install Devise view files?')
 
-  # Access Control
-  acl = ask('Which ACL do you want? [1] = CanCan [2] = CanCanCan [3] = Pundit')
-  case acl
-  when '2'
-    gem 'cancancan', '~> 1.10'
-    generate 'cancan:ability'
-  when '3'
-    gem 'pundit'
-    generate 'pundit:install'
-  else
-    gem 'cancan'
-    generate 'cancan:ability'
-  end
+  gem 'pundit'
+  generate 'pundit:install'
 end
 
 # Setup Static Home Page
