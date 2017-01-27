@@ -32,10 +32,7 @@ gem 'turbolinks'
 gem 'twilio-ruby'
 
 # Twitter Bootstrap
-gem 'less-rails'
-gem 'therubyracer'
-gem 'twitter-bootstrap-rails'
-generate 'bootstrap:install less'
+gem 'bootstrap', '~> 4.0.0.alpha6'
 # Install Bootstrap 3 themed views into /app/views/kaminari
 generate 'kaminari:views bootstrap3'
 
