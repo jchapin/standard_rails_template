@@ -3,53 +3,33 @@
 #
 
 #
-# Authorization / Access Control
+# Authorization
 #
-if yes?('Would you like to install Devise?')
-  # Authorization
-  gem 'devise'
-  generate 'devise:install'
-  model_name = ask('What would you like the user model to be called? [User]')
-  model_name = 'User' if model_name.blank?
-  generate 'devise', model_name
-  generate 'devise:views' if yes?('Install Devise view files?')
-
-  # Access Control
-  acl = ask('Which ACL do you want? [1] = CanCan [2] = CanCanCan [3] = Pundit')
-  case acl
-  when '2'
-    gem 'cancancan', '~> 1.10'
-    generate 'cancan:ability'
-  when '3'
-    gem 'pundit'
-    generate 'pundit:install'
-  else
-    gem 'cancan'
-    generate 'cancan:ability'
-  end
-end
+gem 'devise'
+generate 'devise:install'
+model_name = ask('What would you like the user model to be called? [User]')
+model_name = 'User' if model_name.blank?
+generate 'devise', model_name
+generate 'devise:views' if yes?('Install Devise view files?')
+# Access Control
+gem 'pundit'
+generate 'pundit:install'
 
 # Setup Static Home Page
 generate 'controller', 'static home'
 route "root to: 'static#home'"
 gsub_file 'config/routes.rb', /^  get 'static\/home'\n$/, ''
 
+# Twitter Bootstrap
+gem 'bootstrap', '~> 4.0.0.alpha6'
 # Pagination
 gem 'kaminari'
-# HTTP server currently preferred by Heroku
-gem 'puma'
-gem 'jquery-rails'
-gem 'jquery-turbolinks'
-gem 'turbolinks'
+# Genrate the default views from Kaminari
+generate 'kaminari:views default'
+# Ember - Front End Framework
+gem 'ember-rails'
+# Twilio for SMS and Telephone Communication
 gem 'twilio-ruby'
-
-# Twitter Bootstrap
-gem 'less-rails'
-gem 'therubyracer'
-gem 'twitter-bootstrap-rails'
-generate 'bootstrap:install less'
-# Install Bootstrap 3 themed views into /app/views/kaminari
-generate 'kaminari:views bootstrap3'
 
 # Heroku
 gem_group :production do
@@ -102,7 +82,6 @@ gem_group :development, :test do
   gsub_file 'Gemfile', /^gem 'sqlite3'\n/, ''
   # Add SQLite to development and test.
   gem 'sqlite3'
-  gem 'web-console', '~> 2.0'
 end
 
 gem_group :test do
