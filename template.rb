@@ -37,6 +37,9 @@ gem_group :production do
   gem 'pg'
 end
 
+#
+# Development Only
+#
 gem_group :development do
   # https://github.com/flyerhzm/bullet
   #
@@ -70,10 +73,17 @@ gem_group :development do
   gem 'letter_opener'
 end
 
+#
+# Development and Test
+#
 gem_group :development, :test do
+  # brakeman | security scanner
   gem 'brakeman', require: false
   gem 'byebug'
   gem 'database_cleaner'
+  # letter_opener | open sent e-mail in a browser
+  gem 'letter_opener'
+  # rubocop | static code analysis
   gem 'rubocop'
   gem 'rubocop-checkstyle_formatter', require: false
   gem 'spring'
