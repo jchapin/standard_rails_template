@@ -26,8 +26,6 @@ gem 'bootstrap', '~> 4.0.0.alpha6'
 gem 'kaminari'
 # Genrate the default views from Kaminari
 generate 'kaminari:views default'
-# Ember - Front End Framework
-gem 'ember-rails'
 # Twilio for SMS and Telephone Communication
 gem 'twilio-ruby'
 
