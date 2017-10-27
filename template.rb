@@ -18,7 +18,7 @@ generate 'pundit:install'
 # Setup Static Home Page
 generate 'controller', 'static home'
 route "root to: 'static#home'"
-gsub_file 'config/routes.rb', /^  get 'static\/home'\n$/, ''
+gsub_file 'config/routes.rb', %r{^  get 'static\/home'\n$}, ''
 
 # Twitter Bootstrap
 gem 'bootstrap', '~> 4.0.0.alpha6'
