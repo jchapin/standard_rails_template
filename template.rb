@@ -26,6 +26,8 @@ gem 'bootstrap', '~> 4.0.0.alpha6'
 gem 'kaminari'
 # Genrate the default views from Kaminari
 generate 'kaminari:views default'
+# File Uploads
+gem 'paperclip'
 # Twilio for SMS and Telephone Communication
 gem 'twilio-ruby'
 
