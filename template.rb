@@ -3,7 +3,7 @@
 #
 
 #
-# Authorization
+# Authentication
 #
 gem 'devise'
 generate 'devise:install'
@@ -11,7 +11,9 @@ model_name = ask('What would you like the user model to be called? [User]')
 model_name = 'User' if model_name.blank?
 generate 'devise', model_name
 generate 'devise:views' if yes?('Install Devise view files?')
+#
 # Access Control
+#
 gem 'pundit'
 generate 'pundit:install'
 
