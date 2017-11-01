@@ -14,6 +14,16 @@ generate 'devise:views' if yes?('Install Devise view files?')
 # Access Control
 gem 'pundit'
 generate 'pundit:install'
+#
+# Seed an Administrative User
+#
+require 'securerandom'
+# Remove stock file
+remove_file 'db/seeds.rb'
+# Create a new seeds file containing a user with a random password.
+create_file 'db/seeds.rb', "User.create!(
+  email: 'webmaster@cts-llc.net', password: '#{SecureRandom.hex}'
+)"
 
 # Setup Static Home Page
 generate 'controller', 'static home'
