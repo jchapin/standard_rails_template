@@ -115,12 +115,21 @@ create_file 'config/rubocop.yml', "AllCops:
   TargetRubyVersion: 2.3\n"
 
 # Alter Rakefile to include ci_reporter_minitest
-
 gsub_file('Rakefile', "require_relative 'config/application'\n",
           "require_relative 'config/application'
 if ENV['RAILS_ENV'] == 'development' || ENV['RAILS_ENV'] == 'test'
   require 'ci/reporter/rake/minitest'
 end")
+
+# Prepend SimpleCov to test_helper
+prepend_file('test/test_helper.rb', "# frozen_string_literal: true
+
+require 'simplecov'
+SimpleCov.start 'rails'\n")
+
+# Append coverage report directory to .gitignore
+append_file('.gitignore', "\n# Ignore Test Coverage Report Directory
+/coverage/\n")
 
 #
 # Test Only -
