@@ -16,6 +16,7 @@ generate 'devise:views' if yes?('Install Devise view files?')
 #
 gem 'pundit'
 generate 'pundit:install'
+
 #
 # Seed an Administrative User
 #
@@ -25,7 +26,7 @@ remove_file 'db/seeds.rb'
 # Create a new seeds file containing a user with a random password.
 create_file 'db/seeds.rb', "User.create!(
   email: 'webmaster@cts-llc.net', password: '#{SecureRandom.hex}'
-)"
+)\n"
 
 # Setup Static Home Page
 generate 'controller', 'static home'
@@ -106,6 +107,15 @@ gem_group :development, :test do
   gem 'sqlite3'
 end
 
+create_file 'config/rubocop.yml', "AllCops:
+  Exclude:
+    - 'db/**/*'
+    - 'bin/*'
+  TargetRubyVersion: 2.3\n"
+
+#
+# Test Only -
+#
 gem_group :test do
   gem 'capybara-webkit'
   gem 'capybara-screenshot'
