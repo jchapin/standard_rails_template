@@ -16,6 +16,7 @@ generate 'devise:views' if yes?('Install Devise view files?')
 #
 gem 'pundit'
 generate 'pundit:install'
+
 #
 # Seed an Administrative User
 #
@@ -106,6 +107,15 @@ gem_group :development, :test do
   gem 'sqlite3'
 end
 
+create_file 'config/rubocop.yml', "AllCops:
+  Exclude:
+    - 'db/**/*'
+    - 'bin/*'
+  TargetRubyVersion: 2.3"
+
+#
+# Test Only -
+#
 gem_group :test do
   gem 'capybara-webkit'
   gem 'capybara-screenshot'
