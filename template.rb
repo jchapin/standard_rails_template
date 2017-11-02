@@ -26,7 +26,7 @@ remove_file 'db/seeds.rb'
 # Create a new seeds file containing a user with a random password.
 create_file 'db/seeds.rb', "User.create!(
   email: 'webmaster@cts-llc.net', password: '#{SecureRandom.hex}'
-)"
+)\n"
 
 # Setup Static Home Page
 generate 'controller', 'static home'
@@ -111,7 +111,7 @@ create_file 'config/rubocop.yml', "AllCops:
   Exclude:
     - 'db/**/*'
     - 'bin/*'
-  TargetRubyVersion: 2.3"
+  TargetRubyVersion: 2.3\n"
 
 #
 # Test Only -
