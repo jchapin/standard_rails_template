@@ -31,7 +31,7 @@ create_file 'db/seeds.rb', "User.create!(
 # Setup Static Home Page
 generate 'controller', 'static home'
 route "root to: 'static#home'"
-gsub_file 'config/routes.rb', %r{^  get 'static\/home'\n$}, ''
+gsub_file('config/routes.rb', %r{^  get 'static\/home'\n$}, '')
 
 # Twitter Bootstrap
 gem 'bootstrap', '~> 4.0.0.alpha6'
@@ -107,11 +107,20 @@ gem_group :development, :test do
   gem 'sqlite3'
 end
 
+# Rubocop Configuration File
 create_file 'config/rubocop.yml', "AllCops:
   Exclude:
     - 'db/**/*'
     - 'bin/*'
   TargetRubyVersion: 2.3\n"
+
+# Alter Rakefile to include ci_reporter_minitest
+
+gsub_file('Rakefile', "require_relative 'config/application'\n",
+          "require_relative 'config/application'
+if ENV['RAILS_ENV'] == 'development' || ENV['RAILS_ENV'] == 'test'
+  require 'ci/reporter/rake/minitest'
+end")
 
 #
 # Test Only -
