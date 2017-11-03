@@ -45,6 +45,7 @@ gem 'paperclip'
 gem 'twilio-ruby'
 # Twitter Bootstrap
 gem 'twitter-bootstrap-rails'
+generate 'bootstrap:install static'
 
 # Heroku
 gem_group :production do
