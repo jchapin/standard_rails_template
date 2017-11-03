@@ -33,8 +33,8 @@ generate 'controller', 'static home'
 route "root to: 'static#home'"
 gsub_file('config/routes.rb', %r{^  get 'static\/home'\n$}, '')
 
-# Twitter Bootstrap
-gem 'bootstrap', '~> 4.0.0.alpha6'
+# jQuery - JavaScript Library required by Bootstrap v4
+gem 'jquery-rails'
 # Pagination
 gem 'kaminari'
 # Genrate the default views from Kaminari
@@ -43,6 +43,8 @@ generate 'kaminari:views default'
 gem 'paperclip'
 # Twilio for SMS and Telephone Communication
 gem 'twilio-ruby'
+# Twitter Bootstrap
+gem 'twitter-bootstrap-rails'
 
 # Heroku
 gem_group :production do
