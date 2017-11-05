@@ -20,8 +20,8 @@ generate 'pundit:install'
 # Require SSL in Production
 #
 gsub_file(
-  'config/environments/production.rb', %r{^    # config.force_ssl = true\n$},
-  "    config.force_ssl = true\n"
+  'config/environments/production.rb', %r{# config\.force_ssl = true},
+  "config.force_ssl = true"
 )
 #
 # Seed an Administrative User
