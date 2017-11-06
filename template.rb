@@ -16,7 +16,13 @@ generate 'devise:views' if yes?('Install Devise view files?')
 #
 gem 'pundit'
 generate 'pundit:install'
-
+#
+# Require SSL in Production
+#
+gsub_file(
+  'config/environments/production.rb', %r{# config\.force_ssl = true},
+  "config.force_ssl = true"
+)
 #
 # Seed an Administrative User
 #
