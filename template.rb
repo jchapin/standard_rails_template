@@ -39,6 +39,9 @@ generate 'controller', 'static home'
 route "root to: 'static#home'"
 gsub_file('config/routes.rb', %r{^  get 'static\/home'\n$}, '')
 
+# A simple ActiveRecord mixin to add conventions for flagging records as
+# discarded.
+gem 'discard'
 # jQuery - JavaScript Library required by Bootstrap v4
 gem 'jquery-rails'
 # Pagination
