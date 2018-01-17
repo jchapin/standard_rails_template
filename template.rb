@@ -39,6 +39,9 @@ generate 'controller', 'static home'
 route "root to: 'static#home'"
 gsub_file('config/routes.rb', %r{^  get 'static\/home'\n$}, '')
 
+# Use .env files to automatically load environment variables in development and
+# testing environments.
+gem 'dotenv-rails'
 # A simple ActiveRecord mixin to add conventions for flagging records as
 # discarded.
 gem 'discard'
@@ -142,6 +145,10 @@ SimpleCov.start 'rails'\n")
 # Append coverage report directory to .gitignore
 append_file('.gitignore', "\n# Ignore Test Coverage Report Directory
 /coverage/\n")
+# Ignore .env files as they may contain sensitive information
+append_file('.gitignore', "\n# Ignore development and test environment files
+.env\n")
+
 
 #
 # Test Only -
