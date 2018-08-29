@@ -69,6 +69,15 @@ end
 # Development Only
 #
 gem_group :development do
+  # Used to view mail messages in a web browser without actually sending a
+  # message through a mail server.
+  gem 'letter_opener'
+end
+
+#
+# Development and Test
+#
+gem_group :development, :test do
   # https://github.com/flyerhzm/bullet
   #
   # The Bullet gem is designed to help you increase your application's
@@ -96,15 +105,13 @@ gem_group :development do
     # Bullet.slack = { webhook_url: 'http://some.slack.url', foo: 'bar' }
   end)
   end
-  # Used to view mail messages in a web browser without actually sending a
-  # message through a mail server.
-  gem 'letter_opener'
-end
-
-#
-# Development and Test
-#
-gem_group :development, :test do
+  application(nil, env: 'test') do
+    %(# Enable Bullet, turn on /log/bullet.log during testing.
+  config.after_initialize do
+    Bullet.enable        = true
+    Bullet.bullet_logger = true
+  end)
+  end
   # brakeman | security scanner
   gem 'brakeman', require: false
   gem 'byebug'
