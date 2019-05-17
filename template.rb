@@ -62,6 +62,18 @@ gem 'discard' if yes?('Install discard gem for, "soft deletes"?')
 gem 'fuzzily' if yes?('Install fuzzily gem for, "fuzzy searches"?')
 # geocoder | retrieve latitude and longitude for locations
 gem 'geocoder' if yes?('Install geocoder gem?')
+# paper_trail| track changes to your rails models
+if yes?('Install paper_trail gem?')
+  gem 'paper_trail'
+  # Track changes to associations of your rails models
+  gem 'paper_trail-association_tracking' if yes?('Allow association tracking?')
+end
+# paperclip | file uploads
+if yes?('Install paperclip gem for uploading files?')
+  gem 'paperclip'
+end
+# twilio-ruby| sms and telephone communication
+gem 'twilio-ruby' if yes?('Install twilio-ruby gem for sms and telephone?')
 
 #
 # Frontend Optional Gems
@@ -74,10 +86,7 @@ if yes?('Install kaminari gem for pagination?')
   gem 'kaminari'
   generate 'kaminari:views default' # Genrate the default views from Kaminari
 end
-# File Uploads
-gem 'paperclip'
-# Twilio for SMS and Telephone Communication
-gem 'twilio-ruby'
+
 # Twitter Bootstrap
 gem 'twitter-bootstrap-rails'
 generate 'bootstrap:install static'
