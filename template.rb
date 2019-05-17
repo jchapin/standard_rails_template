@@ -1,4 +1,22 @@
 #
+# Frontend Gems
+#
+
+bootstrap_installed = yes?('Install twitter-bootstrap-rails gem?')
+if bootstrap_installed
+  # Twitter Bootstrap
+  gem 'twitter-bootstrap-rails'
+  generate 'bootstrap:install less'
+  # jquery-rails - JavaScript Library required by Bootstrap v4
+  gem 'jquery-rails'
+end
+# kaminari | pagination
+if yes?('Install kaminari gem for pagination?')
+  gem 'kaminari'
+  generate 'kaminari:views default' # Genrate the default views from Kaminari
+end
+
+#
 # Core Gems
 #
 
@@ -76,22 +94,6 @@ end
 gem 'ransack' if yes?('Install ransack (search) gem?')
 # twilio-ruby| sms and telephone communication
 gem 'twilio-ruby' if yes?('Install twilio-ruby gem for sms and telephone?')
-
-#
-# Frontend Optional Gems
-#
-
-# jquery-rails - JavaScript Library required by Bootstrap v4
-gem 'jquery-rails' if yes?('Install jquery-rails gem?')
-# kaminari | pagination
-if yes?('Install kaminari gem for pagination?')
-  gem 'kaminari'
-  generate 'kaminari:views default' # Genrate the default views from Kaminari
-end
-
-# Twitter Bootstrap
-gem 'twitter-bootstrap-rails'
-generate 'bootstrap:install static'
 
 # Heroku
 gem_group :production do
