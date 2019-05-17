@@ -44,6 +44,9 @@ generate 'controller', 'static home'
 route "root to: 'static#home'"
 gsub_file('config/routes.rb', %r{^  get 'static\/home'\n$}, '')
 
+# Error Reporting
+gem 'honeybadger'
+
 #
 # Optional Gems
 #
