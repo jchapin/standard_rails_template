@@ -18,7 +18,6 @@ if yes?('Install kaminari gem for pagination?')
   generate 'kaminari:views default' # Genrate the default views from Kaminari
 end
 
-
 #
 # Core Gems
 #
@@ -101,6 +100,12 @@ if yes?('Install paperclip gem for uploading files?')
 end
 # ransack - search models for specific records
 gem 'ransack' if yes?('Install ransack (search) gem?')
+# rubyXL - Read XLSX files, for importation of data from Excel. We're only going
+# =>       to include this when we need it, during data importation.
+gem 'rubyXL', require: false if yes?('Install rubyXL (.xlsx) gem?')
+# For exporting binary Excel XLS format documents. Not to be confused with the
+# Open XLSX standard.
+gem 'spreadsheet', require: false if yes?('Install spreadsheet (.xls) gem?')
 # twilio-ruby| sms and telephone communication
 gem 'twilio-ruby' if yes?('Install twilio-ruby gem for sms and telephone?')
 
