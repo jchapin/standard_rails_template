@@ -11,11 +11,13 @@ model_name = ask('What would you like the user model to be called? [User]')
 model_name = 'User' if model_name.blank?
 generate 'devise', model_name
 generate 'devise:views' if yes?('Install Devise view files?')
+
 #
 # Access Control
 #
 gem 'pundit'
 generate 'pundit:install'
+
 #
 # Require SSL in Production
 #
@@ -23,6 +25,7 @@ gsub_file(
   'config/environments/production.rb', %r{# config\.force_ssl = true},
   "config.force_ssl = true"
 )
+
 #
 # Seed an Administrative User
 #
@@ -34,14 +37,13 @@ create_file 'db/seeds.rb', "User.create!(
   email: 'webmaster@cts-llc.net', password: '#{SecureRandom.hex}'
 )\n"
 
+#
 # Setup Static Home Page
+#
 generate 'controller', 'static home'
 route "root to: 'static#home'"
 gsub_file('config/routes.rb', %r{^  get 'static\/home'\n$}, '')
 
-# Use .env files to automatically load environment variables in development and
-# testing environments.
-gem 'dotenv-rails'
 # A simple ActiveRecord mixin to add conventions for flagging records as
 # discarded.
 gem 'discard'
