@@ -89,6 +89,8 @@ gem 'discard' if yes?('Install discard gem for, "soft deletes"?')
 gem 'fuzzily' if yes?('Install fuzzily gem for, "fuzzy searches"?')
 # geocoder | retrieve latitude and longitude for locations
 gem 'geocoder' if yes?('Install geocoder gem?')
+# net-sftp| connect to SFTP server for file drops.
+gem 'net-sftp' if yes?('Install SFTP capability?')
 # paper_trail| track changes to your rails models
 if yes?('Install paper_trail gem?')
   gem 'paper_trail'
