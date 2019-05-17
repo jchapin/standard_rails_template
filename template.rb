@@ -44,9 +44,17 @@ generate 'controller', 'static home'
 route "root to: 'static#home'"
 gsub_file('config/routes.rb', %r{^  get 'static\/home'\n$}, '')
 
+#
+# Optional Gems
+#
+
+# Interact with Amazon Web Services (S3, CloudFront, etc.)
+gem 'aws-sdk' if yes?('Install aws-sdk gem?')
+# Cocoon for implementing forms for associated models.
+gem 'cocoon' if yes?('Install cocoon gem for associated model forms?')
 # A simple ActiveRecord mixin to add conventions for flagging records as
 # discarded.
-gem 'discard'
+gem 'discard' if yes?('Install discard gem for, "soft deletes"?')
 # jQuery - JavaScript Library required by Bootstrap v4
 gem 'jquery-rails'
 # Pagination
