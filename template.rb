@@ -102,6 +102,8 @@ if yes?('Install paperclip gem for uploading files?')
   gem 'paperclip'
   gem 'delayed_paperclip' if installed_delayed_job
 end
+# rack-rewrite | 301 redirects (useful for domain name changes)
+gem 'rack-rewrite' if yes?('Install rack-rewrite gem?')
 # ransack - search models for specific records
 gem 'ransack' if yes?('Install ransack (search) gem?')
 # rubyXL - Read XLSX files, for importation of data from Excel. We're only going
