@@ -78,6 +78,8 @@ end
 # Development and Test
 #
 gem_group :development, :test do
+  # brakeman | security scanner
+  gem 'brakeman', require: false
   # https://github.com/flyerhzm/bullet
   #
   # The Bullet gem is designed to help you increase your application's
