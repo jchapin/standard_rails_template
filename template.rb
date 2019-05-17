@@ -7,6 +7,8 @@ if installed_bootstrap
   # Twitter Bootstrap
   gem 'twitter-bootstrap-rails'
   generate 'bootstrap:install less'
+  # bootstrap-datepicker-rails | bootstrap styled jQuery date input
+  gem 'bootstrap-datepicker-rails' if yes?('Install bootstrap datepicker?')
   # jquery-rails - JavaScript Library required by Bootstrap v4
   gem 'jquery-rails'
 end
