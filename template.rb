@@ -202,8 +202,8 @@ append_file('.gitignore', "\n# Ignore development and test environment files
 # Test Only -
 #
 gem_group :test do
-  gem 'capybara-webkit'
   gem 'capybara-screenshot'
+  gem 'capybara-webkit'
   gem 'ci_reporter_minitest'
   gem 'simplecov', require: false
   gem 'vcr'
