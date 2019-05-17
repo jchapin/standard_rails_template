@@ -28,7 +28,7 @@ generate 'devise:install'
 model_name = ask('What would you like the user model to be called? [User]')
 model_name = 'User' if model_name.blank?
 generate 'devise', model_name
-generate 'devise:views' if yes?('Install Devise view files?')
+generate 'devise:views' if bootstrap_installed
 
 #
 # Access Control
