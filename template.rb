@@ -72,8 +72,6 @@ gsub_file('config/routes.rb', %r{^  get 'static\/home'\n$}, '')
 
 # honeybadger | exception reporting
 gem 'honeybadger'
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: %i[jruby]
 
 #
 # Backend Optional Gems
