@@ -113,6 +113,17 @@ gem 'spreadsheet', require: false if yes?('Install spreadsheet (.xls) gem?')
 # twilio-ruby| sms and telephone communication
 gem 'twilio-ruby' if yes?('Install twilio-ruby gem for sms and telephone?')
 
+#
+# API Specific Gems
+#
+# Oj, a faster library for exporting JSON.
+if yes?('Install oj gem for faster JSON serialization?')
+  gem 'oj'
+  gem 'oj_mimic_json'
+end
+# Ox, a faster library for exporting XML.
+gem 'ox' if yes?('Install ox gem for faster XML?')
+
 # Heroku
 gem_group :production do
   gem 'rails_12factor'
