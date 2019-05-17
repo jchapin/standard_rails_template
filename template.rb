@@ -119,8 +119,10 @@ gem_group :development, :test do
   # Use .env files to automatically load environment variables in development
   # and testing environments
   gem 'dotenv-rails'
-  # i18n-tasks | Manage internationalization and localization files.
+  # i18n-tasks | manage internationalization and localization files
   gem 'i18n-tasks'
+  # rack-mini-profiler | profile page loading
+  gem 'rack-mini-profiler', require: false
   # rubocop | static code analysis
   gem 'rubocop'
   gem 'rubocop-checkstyle_formatter', require: false
