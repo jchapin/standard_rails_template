@@ -10,11 +10,14 @@ if installed_bootstrap
   # jquery-rails - JavaScript Library required by Bootstrap v4
   gem 'jquery-rails'
 end
+# font-awesome-rails | icons
+gem 'font-awesome-rails' if yes?('Install font-awesome-rails icons?')
 # kaminari | pagination
 if yes?('Install kaminari gem for pagination?')
   gem 'kaminari'
   generate 'kaminari:views default' # Genrate the default views from Kaminari
 end
+
 
 #
 # Core Gems
