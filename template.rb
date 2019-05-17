@@ -175,8 +175,6 @@ end
 gem_group :development do
   # benchmark-memory | a tool that helps you to benchmark memory usage
   gem 'benchmark-memory'
-  # For call-stack profiling flamegraphs
-  gem 'flamegraph'
   # Used to view mail messages in a web browser without actually sending a
   # message through a mail server.
   gem 'letter_opener'
