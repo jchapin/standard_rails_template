@@ -114,12 +114,11 @@ gem_group :development, :test do
     Bullet.bullet_logger = true
   end)
   end
-  # brakeman | security scanner
-  gem 'brakeman', require: false
-  gem 'byebug'
+  gem 'byebug', platforms: %i[mri]
   gem 'database_cleaner'
-  # letter_opener | open sent e-mail in a browser
-  gem 'letter_opener'
+  # Use .env files to automatically load environment variables in development
+  # and testing environments
+  gem 'dotenv-rails'
   # rubocop | static code analysis
   gem 'rubocop'
   gem 'rubocop-checkstyle_formatter', require: false
@@ -157,7 +156,6 @@ append_file('.gitignore', "\n# Ignore Test Coverage Report Directory
 # Ignore .env files as they may contain sensitive information
 append_file('.gitignore', "\n# Ignore development and test environment files
 .env\n")
-
 
 #
 # Test Only -
