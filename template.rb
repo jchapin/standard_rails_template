@@ -44,7 +44,7 @@ generate 'controller', 'static home'
 route "root to: 'static#home'"
 gsub_file('config/routes.rb', %r{^  get 'static\/home'\n$}, '')
 
-# Error Reporting
+# honeybadger | exception reporting
 gem 'honeybadger'
 
 #
@@ -58,6 +58,8 @@ gem 'cocoon' if yes?('Install cocoon gem for associated model forms?')
 # A simple ActiveRecord mixin to add conventions for flagging records as
 # discarded.
 gem 'discard' if yes?('Install discard gem for, "soft deletes"?')
+# geocoder | retrieve latitude and longitude for locations
+gem 'geocoder' if yes?('Install geocoder gem?')
 # jQuery - JavaScript Library required by Bootstrap v4
 gem 'jquery-rails'
 # Pagination
