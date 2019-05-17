@@ -72,6 +72,8 @@ gem_group :development do
   # Used to view mail messages in a web browser without actually sending a
   # message through a mail server.
   gem 'letter_opener'
+  # rails-erd | generate entity relationship diagrams
+  gem 'rails-erd'
 end
 
 #
