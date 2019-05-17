@@ -72,6 +72,8 @@ end
 if yes?('Install paperclip gem for uploading files?')
   gem 'paperclip'
 end
+# ransack - search models for specific records
+gem 'ransack' if yes?('Install ransack (search) gem?')
 # twilio-ruby| sms and telephone communication
 gem 'twilio-ruby' if yes?('Install twilio-ruby gem for sms and telephone?')
 
