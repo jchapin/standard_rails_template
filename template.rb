@@ -11,6 +11,10 @@ if installed_bootstrap
   gem 'bootstrap-datepicker-rails' if yes?('Install bootstrap datepicker?')
   # jquery-rails - JavaScript Library required by Bootstrap v4
   gem 'jquery-rails'
+  # less-rails | Used to ease Bootstrap theme modifications
+  gem 'less-rails'
+  # therubyracer | Required to use Less
+  gem 'therubyracer'
 end
 # font-awesome-rails | icons
 gem 'font-awesome-rails' if yes?('Install font-awesome-rails icons?')
@@ -68,6 +72,8 @@ gsub_file('config/routes.rb', %r{^  get 'static\/home'\n$}, '')
 
 # honeybadger | exception reporting
 gem 'honeybadger'
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'tzinfo-data', platforms: %i[jruby]
 
 #
 # Backend Optional Gems
