@@ -150,7 +150,6 @@ gem_group :development, :test do
     Bullet.bullet_logger = true
   end)
   end
-  gem 'byebug', platforms: %i[mri]
   gem 'database_cleaner'
   # Use .env files to automatically load environment variables in development
   # and testing environments
