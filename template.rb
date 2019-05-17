@@ -77,8 +77,12 @@ gem 'honeybadger'
 # Backend Optional Gems
 #
 
+# attr_encrypted| encrypt model attributes
+gem 'attr_encrypted', '~> 3.0.0' if yes?('Install attr_encrypted gem?')
 # Interact with Amazon Web Services (S3, CloudFront, etc.)
 gem 'aws-sdk' if yes?('Install aws-sdk gem?')
+# city-state | library of US states and cities for forms
+gem 'city-state' if yes?('Install city-state gem?')
 # Cocoon for implementing forms for associated models.
 gem 'cocoon' if yes?('Install cocoon gem for associated model forms?')
 # Delayed Job Queue
@@ -93,6 +97,17 @@ gem 'discard' if yes?('Install discard gem for, "soft deletes"?')
 gem 'fuzzily' if yes?('Install fuzzily gem for, "fuzzy searches"?')
 # geocoder | retrieve latitude and longitude for locations
 gem 'geocoder' if yes?('Install geocoder gem?')
+# gibbon | MailChimp e-mail marketing
+gem 'gibbon' if yes?('Install gibbon for MailChimp integration?')
+# Allow hashes of numeric IDs to be calculated to obfuscate sequential access
+# to application records.
+gem 'hashid-rails' if yes?('Install hashid-rails to obfuscate IDs?')
+# koala | Facebook API access.
+gem 'koala' if yes?('Install koala for Facebook API access?')
+# mandrill-api | Mandrill (MailChimp) Transactional E-Mail
+gem 'mandrill-api' if yes?('Install mandrill-api for transactional e-mail?')
+# mechanize | web automation and scraping
+gem 'mechanize' if yes?('Install mechanize for web automation and scraping?')
 # net-sftp| connect to SFTP server for file drops.
 gem 'net-sftp' if yes?('Install SFTP capability?')
 # paper_trail| track changes to your rails models
@@ -118,6 +133,10 @@ gem 'rubyXL', require: false if yes?('Install rubyXL (.xlsx) gem?')
 gem 'spreadsheet', require: false if yes?('Install spreadsheet (.xls) gem?')
 # twilio-ruby| sms and telephone communication
 gem 'twilio-ruby' if yes?('Install twilio-ruby gem for sms and telephone?')
+if yes?('Install two factor auth gem?')
+  gem 'two_factor_authentication'
+  gem 'rqrcode'
+end
 
 #
 # API Specific Gems
@@ -129,6 +148,20 @@ if yes?('Install oj gem for faster JSON serialization?')
 end
 # Ox, a faster library for exporting XML.
 gem 'ox' if yes?('Install ox gem for faster XML?')
+
+#
+# Financial
+#
+if yes?('Do you need to install financial services?')
+  # ach | write ACH transfer batch files
+  gem 'ach' if yes?('Install ach gem for writing NACHA files?')
+  # Monetize, for converting other objects into Money.
+  gem 'monetize' if yes?('Install monetize for money handling?')
+  # Plaid for enabling ACH payments
+  gem 'plaid' if yes?('Install plaid for account authentication and info?')
+  # stripe | payment processing
+  gem 'stripe' if yes?('Install stripe for payment processing?')
+end
 
 # Heroku
 gem_group :production do
@@ -142,9 +175,13 @@ end
 gem_group :development do
   # benchmark-memory | a tool that helps you to benchmark memory usage
   gem 'benchmark-memory'
+  # For call-stack profiling flamegraphs
+  gem 'flamegraph'
   # Used to view mail messages in a web browser without actually sending a
   # message through a mail server.
   gem 'letter_opener'
+  # rack-mini-profiler | profile page loading
+  gem 'rack-mini-profiler', require: false
   # rails-erd | generate entity relationship diagrams
   gem 'rails-erd'
 end
@@ -195,8 +232,6 @@ gem_group :development, :test do
   gem 'dotenv-rails'
   # i18n-tasks | manage internationalization and localization files
   gem 'i18n-tasks'
-  # rack-mini-profiler | profile page loading
-  gem 'rack-mini-profiler', require: false
   # rubocop | static code analysis
   gem 'rubocop'
   gem 'rubocop-checkstyle_formatter', require: false
