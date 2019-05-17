@@ -128,6 +128,7 @@ gem_group :development, :test do
   # rubocop | static code analysis
   gem 'rubocop'
   gem 'rubocop-checkstyle_formatter', require: false
+  gem 'rubocop-performance'
   gem 'spring'
   # Remove SQLite from ALL environments. Only want it in development and test.
   gsub_file 'Gemfile', /^# Use sqlite3 as the database for Active Record\n/, ''
