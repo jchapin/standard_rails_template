@@ -48,7 +48,7 @@ gsub_file('config/routes.rb', %r{^  get 'static\/home'\n$}, '')
 gem 'honeybadger'
 
 #
-# Optional Gems
+# Backend Optional Gems
 #
 
 # Interact with Amazon Web Services (S3, CloudFront, etc.)
@@ -62,12 +62,18 @@ gem 'discard' if yes?('Install discard gem for, "soft deletes"?')
 gem 'fuzzily' if yes?('Install fuzzily gem for, "fuzzy searches"?')
 # geocoder | retrieve latitude and longitude for locations
 gem 'geocoder' if yes?('Install geocoder gem?')
-# jQuery - JavaScript Library required by Bootstrap v4
-gem 'jquery-rails'
-# Pagination
-gem 'kaminari'
-# Genrate the default views from Kaminari
-generate 'kaminari:views default'
+
+#
+# Frontend Optional Gems
+#
+
+# jquery-rails - JavaScript Library required by Bootstrap v4
+gem 'jquery-rails' if yes?('Install jquery-rails gem?')
+# kaminari | pagination
+if yes?('Install kaminari gem for pagination?')
+  gem 'kaminari'
+  generate 'kaminari:views default' # Genrate the default views from Kaminari
+end
 # File Uploads
 gem 'paperclip'
 # Twilio for SMS and Telephone Communication
