@@ -2,8 +2,8 @@
 # Frontend Gems
 #
 
-bootstrap_installed = yes?('Install twitter-bootstrap-rails gem?')
-if bootstrap_installed
+installed_bootstrap = yes?('Install twitter-bootstrap-rails gem?')
+if installed_bootstrap
   # Twitter Bootstrap
   gem 'twitter-bootstrap-rails'
   generate 'bootstrap:install less'
@@ -28,7 +28,7 @@ generate 'devise:install'
 model_name = ask('What would you like the user model to be called? [User]')
 model_name = 'User' if model_name.blank?
 generate 'devise', model_name
-generate 'devise:views' if bootstrap_installed
+generate 'devise:views' if installed_bootstrap
 
 #
 # Access Control
@@ -73,6 +73,11 @@ gem 'honeybadger'
 gem 'aws-sdk' if yes?('Install aws-sdk gem?')
 # Cocoon for implementing forms for associated models.
 gem 'cocoon' if yes?('Install cocoon gem for associated model forms?')
+# Delayed Job Queue
+installed_delayed_job = yes?('Install basic delayed_job queue?')
+if installed_delayed_job
+  gem 'delayed_job_active_record'
+end
 # A simple ActiveRecord mixin to add conventions for flagging records as
 # discarded.
 gem 'discard' if yes?('Install discard gem for, "soft deletes"?')
@@ -89,6 +94,7 @@ end
 # paperclip | file uploads
 if yes?('Install paperclip gem for uploading files?')
   gem 'paperclip'
+  gem 'delayed_paperclip' if installed_delayed_job
 end
 # ransack - search models for specific records
 gem 'ransack' if yes?('Install ransack (search) gem?')
