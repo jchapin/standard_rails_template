@@ -58,6 +58,8 @@ gem 'cocoon' if yes?('Install cocoon gem for associated model forms?')
 # A simple ActiveRecord mixin to add conventions for flagging records as
 # discarded.
 gem 'discard' if yes?('Install discard gem for, "soft deletes"?')
+# fuzzily | inexact search matching
+gem 'fuzzily' if yes?('Install fuzzily gem for, "fuzzy searches"?')
 # geocoder | retrieve latitude and longitude for locations
 gem 'geocoder' if yes?('Install geocoder gem?')
 # jQuery - JavaScript Library required by Bootstrap v4
