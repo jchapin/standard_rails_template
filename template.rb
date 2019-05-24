@@ -1,4 +1,30 @@
 #
+# Frontend Gems
+#
+
+installed_bootstrap = yes?('Install twitter-bootstrap-rails gem?')
+if installed_bootstrap
+  # Twitter Bootstrap
+  gem 'twitter-bootstrap-rails'
+  generate 'bootstrap:install less'
+  # bootstrap-datepicker-rails | bootstrap styled jQuery date input
+  gem 'bootstrap-datepicker-rails' if yes?('Install bootstrap datepicker?')
+  # jquery-rails - JavaScript Library required by Bootstrap v4
+  gem 'jquery-rails'
+  # less-rails | Used to ease Bootstrap theme modifications
+  gem 'less-rails'
+  # therubyracer | Required to use Less
+  gem 'therubyracer'
+end
+# font-awesome-rails | icons
+gem 'font-awesome-rails' if yes?('Install font-awesome-rails icons?')
+# kaminari | pagination
+if yes?('Install kaminari gem for pagination?')
+  gem 'kaminari'
+  generate 'kaminari:views default' # Genrate the default views from Kaminari
+end
+
+#
 # Core Gems
 #
 
@@ -10,12 +36,14 @@ generate 'devise:install'
 model_name = ask('What would you like the user model to be called? [User]')
 model_name = 'User' if model_name.blank?
 generate 'devise', model_name
-generate 'devise:views' if yes?('Install Devise view files?')
+generate 'devise:views' if installed_bootstrap
+
 #
 # Access Control
 #
 gem 'pundit'
 generate 'pundit:install'
+
 #
 # Require SSL in Production
 #
@@ -23,6 +51,7 @@ gsub_file(
   'config/environments/production.rb', %r{# config\.force_ssl = true},
   "config.force_ssl = true"
 )
+
 #
 # Seed an Administrative User
 #
@@ -34,30 +63,105 @@ create_file 'db/seeds.rb', "User.create!(
   email: 'webmaster@cts-llc.net', password: '#{SecureRandom.hex}'
 )\n"
 
+#
 # Setup Static Home Page
+#
 generate 'controller', 'static home'
 route "root to: 'static#home'"
 gsub_file('config/routes.rb', %r{^  get 'static\/home'\n$}, '')
 
-# Use .env files to automatically load environment variables in development and
-# testing environments.
-gem 'dotenv-rails'
+# honeybadger | exception reporting
+gem 'honeybadger'
+
+#
+# Backend Optional Gems
+#
+
+# attr_encrypted| encrypt model attributes
+gem 'attr_encrypted', '~> 3.0.0' if yes?('Install attr_encrypted gem?')
+# Interact with Amazon Web Services (S3, CloudFront, etc.)
+gem 'aws-sdk' if yes?('Install aws-sdk gem?')
+# city-state | library of US states and cities for forms
+gem 'city-state' if yes?('Install city-state gem?')
+# Cocoon for implementing forms for associated models.
+gem 'cocoon' if yes?('Install cocoon gem for associated model forms?')
+# Delayed Job Queue
+installed_delayed_job = yes?('Install basic delayed_job queue?')
+if installed_delayed_job
+  gem 'delayed_job_active_record'
+end
 # A simple ActiveRecord mixin to add conventions for flagging records as
 # discarded.
-gem 'discard'
-# jQuery - JavaScript Library required by Bootstrap v4
-gem 'jquery-rails'
-# Pagination
-gem 'kaminari'
-# Genrate the default views from Kaminari
-generate 'kaminari:views default'
-# File Uploads
-gem 'paperclip'
-# Twilio for SMS and Telephone Communication
-gem 'twilio-ruby'
-# Twitter Bootstrap
-gem 'twitter-bootstrap-rails'
-generate 'bootstrap:install static'
+gem 'discard' if yes?('Install discard gem for, "soft deletes"?')
+# fuzzily | inexact search matching
+gem 'fuzzily' if yes?('Install fuzzily gem for, "fuzzy searches"?')
+# geocoder | retrieve latitude and longitude for locations
+gem 'geocoder' if yes?('Install geocoder gem?')
+# gibbon | MailChimp e-mail marketing
+gem 'gibbon' if yes?('Install gibbon for MailChimp integration?')
+# Allow hashes of numeric IDs to be calculated to obfuscate sequential access
+# to application records.
+gem 'hashid-rails' if yes?('Install hashid-rails to obfuscate IDs?')
+# koala | Facebook API access.
+gem 'koala' if yes?('Install koala for Facebook API access?')
+# mandrill-api | Mandrill (MailChimp) Transactional E-Mail
+gem 'mandrill-api' if yes?('Install mandrill-api for transactional e-mail?')
+# mechanize | web automation and scraping
+gem 'mechanize' if yes?('Install mechanize for web automation and scraping?')
+# net-sftp| connect to SFTP server for file drops.
+gem 'net-sftp' if yes?('Install SFTP capability?')
+# paper_trail| track changes to your rails models
+if yes?('Install paper_trail gem?')
+  gem 'paper_trail'
+  # Track changes to associations of your rails models
+  gem 'paper_trail-association_tracking' if yes?('Allow association tracking?')
+end
+# paperclip | file uploads
+if yes?('Install paperclip gem for uploading files?')
+  gem 'paperclip'
+  gem 'delayed_paperclip' if installed_delayed_job
+end
+# rack-rewrite | 301 redirects (useful for domain name changes)
+gem 'rack-rewrite' if yes?('Install rack-rewrite gem?')
+# ransack - search models for specific records
+gem 'ransack' if yes?('Install ransack (search) gem?')
+# rubyXL - Read XLSX files, for importation of data from Excel. We're only going
+# =>       to include this when we need it, during data importation.
+gem 'rubyXL', require: false if yes?('Install rubyXL (.xlsx) gem?')
+# For exporting binary Excel XLS format documents. Not to be confused with the
+# Open XLSX standard.
+gem 'spreadsheet', require: false if yes?('Install spreadsheet (.xls) gem?')
+# twilio-ruby| sms and telephone communication
+gem 'twilio-ruby' if yes?('Install twilio-ruby gem for sms and telephone?')
+if yes?('Install two factor auth gem?')
+  gem 'two_factor_authentication'
+  gem 'rqrcode'
+end
+
+#
+# API Specific Gems
+#
+# Oj, a faster library for exporting JSON.
+if yes?('Install oj gem for faster JSON serialization?')
+  gem 'oj'
+  gem 'oj_mimic_json'
+end
+# Ox, a faster library for exporting XML.
+gem 'ox' if yes?('Install ox gem for faster XML?')
+
+#
+# Financial
+#
+if yes?('Do you need to install financial services?')
+  # ach | write ACH transfer batch files
+  gem 'ach' if yes?('Install ach gem for writing NACHA files?')
+  # Monetize, for converting other objects into Money.
+  gem 'monetize' if yes?('Install monetize for money handling?')
+  # Plaid for enabling ACH payments
+  gem 'plaid' if yes?('Install plaid for account authentication and info?')
+  # stripe | payment processing
+  gem 'stripe' if yes?('Install stripe for payment processing?')
+end
 
 # Heroku
 gem_group :production do
@@ -69,15 +173,23 @@ end
 # Development Only
 #
 gem_group :development do
+  # benchmark-memory | a tool that helps you to benchmark memory usage
+  gem 'benchmark-memory'
   # Used to view mail messages in a web browser without actually sending a
   # message through a mail server.
   gem 'letter_opener'
+  # rack-mini-profiler | profile page loading
+  gem 'rack-mini-profiler', require: false
+  # rails-erd | generate entity relationship diagrams
+  gem 'rails-erd'
 end
 
 #
 # Development and Test
 #
 gem_group :development, :test do
+  # brakeman | security scanner
+  gem 'brakeman', require: false
   # https://github.com/flyerhzm/bullet
   #
   # The Bullet gem is designed to help you increase your application's
@@ -112,21 +224,22 @@ gem_group :development, :test do
     Bullet.bullet_logger = true
   end)
   end
-  # brakeman | security scanner
-  gem 'brakeman', require: false
-  gem 'byebug'
   gem 'database_cleaner'
-  # letter_opener | open sent e-mail in a browser
-  gem 'letter_opener'
+  # Use .env files to automatically load environment variables in development
+  # and testing environments
+  gem 'dotenv-rails'
+  # i18n-tasks | manage internationalization and localization files
+  gem 'i18n-tasks'
   # rubocop | static code analysis
   gem 'rubocop'
   gem 'rubocop-checkstyle_formatter', require: false
+  gem 'rubocop-performance'
   gem 'spring'
   # Remove SQLite from ALL environments. Only want it in development and test.
   gsub_file 'Gemfile', /^# Use sqlite3 as the database for Active Record\n/, ''
   gsub_file 'Gemfile', /^gem 'sqlite3'\n/, ''
   # Add SQLite to development and test.
-  gem 'sqlite3'
+  gem 'sqlite3', '< 1.4.0'
 end
 
 # Rubocop Configuration File
@@ -156,13 +269,12 @@ append_file('.gitignore', "\n# Ignore Test Coverage Report Directory
 append_file('.gitignore', "\n# Ignore development and test environment files
 .env\n")
 
-
 #
 # Test Only -
 #
 gem_group :test do
-  gem 'capybara-webkit'
   gem 'capybara-screenshot'
+  gem 'capybara-webkit'
   gem 'ci_reporter_minitest'
   gem 'simplecov', require: false
   gem 'vcr'
