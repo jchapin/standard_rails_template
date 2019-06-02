@@ -16,6 +16,10 @@ if installed_bootstrap
   # therubyracer | Required to use Less
   gem 'therubyracer'
   generate 'bootstrap:layout', 'application'
+  gsub_file(
+    'app/assets/stylesheets/application.css',
+    %r{^ \*\/\n}, " */\n\nbody {\n  margin: 50px 0 60px 0;\n}"
+  )
 end
 # font-awesome-rails | icons
 if yes?('Install font-awesome-rails icons?')
