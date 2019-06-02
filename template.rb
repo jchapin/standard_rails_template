@@ -18,7 +18,13 @@ if installed_bootstrap
   generate 'bootstrap:layout', 'application'
 end
 # font-awesome-rails | icons
-gem 'font-awesome-rails' if yes?('Install font-awesome-rails icons?')
+if yes?('Install font-awesome-rails icons?')
+  gem 'font-awesome-rails'
+  gsub_file(
+    'app/assets/stylesheets/application.css',
+    %r{^ \*= require_tree \.}, " *= require_tree .\n *= require font-awesome"
+  )
+end
 # kaminari | pagination
 if yes?('Install kaminari gem for pagination?')
   gem 'kaminari'
