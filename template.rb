@@ -15,6 +15,7 @@ if installed_bootstrap
   gem 'less-rails'
   # therubyracer | Required to use Less
   gem 'therubyracer'
+  generate 'bootstrap:layout' application
 end
 # font-awesome-rails | icons
 gem 'font-awesome-rails' if yes?('Install font-awesome-rails icons?')
