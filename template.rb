@@ -40,19 +40,6 @@ end
 #
 
 #
-# Authentication
-#
-gem 'devise'
-generate 'devise:install'
-model_name = ask('What would you like the user model to be called? [User]')
-model_name = 'User' if model_name.blank?
-generate 'devise', model_name
-generate 'controller', model_name.pluralize
-generate 'devise:views' if installed_bootstrap
-generate 'bootstrap:themed', model_name.pluralize if installed_bootstrap
-generate 'pundit:policy', model_name.pluralize
-
-#
 # Access Control
 #
 gem 'pundit'
@@ -61,6 +48,23 @@ gsub_file(
   'app/controllers/application_controller.rb',
   %r{^end\n}, "  include Pundit\n  protect_from_forgery with: :exception\nend\n"
 )
+
+#
+# Authentication
+#
+gem 'devise'
+generate 'devise:install'
+model_name = ask('What would you like the user model to be called? [User]')
+model_name = 'User' if model_name.blank?
+generate 'devise', model_name
+generate 'controller', model_name.pluralize
+gsub_file(
+  'config/routes.rb',
+  %r{devise_for :users}, "devise_for :users\n  resources :users"
+)
+generate 'devise:views' if installed_bootstrap
+generate 'bootstrap:themed', model_name.pluralize if installed_bootstrap
+generate 'pundit:policy', model_name.pluralize
 
 #
 # Require SSL in Production
