@@ -57,6 +57,10 @@ generate 'pundit:policy', model_name.pluralize
 #
 gem 'pundit'
 generate 'pundit:install'
+gsub_file(
+  'app/controllers/application_controller.rb',
+  %r{^end\n}, "  include Pundit\n  protect_from_forgery with: :exception\nend\n"
+)
 
 #
 # Require SSL in Production
