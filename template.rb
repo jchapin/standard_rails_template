@@ -18,7 +18,7 @@ if installed_bootstrap
   generate 'bootstrap:layout', 'application'
   gsub_file(
     'app/assets/stylesheets/application.css',
-    %r{^ \*\/\n}, " */\n\nbody {\n  margin: 50px 0 60px 0;\n}"
+    %r{^ \*\/\n}, " */\n\nbody {\n  margin: 50px 0 60px 0;\n}\n"
   )
 end
 # font-awesome-rails | icons
