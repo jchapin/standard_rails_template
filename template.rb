@@ -15,9 +15,20 @@ if installed_bootstrap
   gem 'less-rails'
   # therubyracer | Required to use Less
   gem 'therubyracer'
+  generate 'bootstrap:layout', 'application'
+  gsub_file(
+    'app/assets/stylesheets/application.css',
+    %r{^ \*\/\n}, " */\n\nbody {\n  margin: 50px 0 60px 0;\n}\n"
+  )
 end
 # font-awesome-rails | icons
-gem 'font-awesome-rails' if yes?('Install font-awesome-rails icons?')
+if yes?('Install font-awesome-rails icons?')
+  gem 'font-awesome-rails'
+  gsub_file(
+    'app/assets/stylesheets/application.css',
+    %r{^ \*= require_tree \.}, " *= require_tree .\n *= require font-awesome"
+  )
+end
 # kaminari | pagination
 if yes?('Install kaminari gem for pagination?')
   gem 'kaminari'
@@ -36,7 +47,10 @@ generate 'devise:install'
 model_name = ask('What would you like the user model to be called? [User]')
 model_name = 'User' if model_name.blank?
 generate 'devise', model_name
+generate 'controller', model_name.pluralize
 generate 'devise:views' if installed_bootstrap
+generate 'bootstrap:themed', model_name.pluralize if installed_bootstrap
+generate 'pundit:policy', model_name.pluralize
 
 #
 # Access Control
