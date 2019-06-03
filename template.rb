@@ -46,7 +46,23 @@ gem 'pundit'
 generate 'pundit:install'
 gsub_file(
   'app/controllers/application_controller.rb',
-  %r{^end\n}, "  include Pundit\n  protect_from_forgery with: :exception\nend\n"
+  %r{^end\n}, %(  include Pundit
+  protect_from_forgery with: :exception
+  # Require a User to be logged in for every action by default.
+  before_action :authenticate_user!
+  # Rescue from unauthorized with an error.
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
+  ##
+  # Forward the unauthorized user to the previous page or the home page of the
+  # application.
+  #
+  def user_not_authorized
+    flash[:alert] = t(:error_not_authorized)
+    redirect_to(request.referer || root_path)
+  end
+end
+)
 )
 
 #
