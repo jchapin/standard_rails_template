@@ -16,10 +16,20 @@ if installed_bootstrap
   # therubyracer | Required to use Less
   gem 'therubyracer'
   generate 'bootstrap:layout', 'application'
+  # Add CSS that prevents body content from rendering underneath the navbar and
+  # footer. Add CSS that renders the alerts in bootstrap alert dialogues.
   gsub_file(
     'app/assets/stylesheets/application.css',
     %r{^ \*\/\n}, " */\n\nbody {\n  margin: 50px 0 60px 0;\n}\n"
   )
+  # Add jQuery and Bootstrap JS to the JavaScript manifest
+  gsub_file(
+    'app/assets/javascripts/application.js',
+    %r{^//= require rails-ujs}, "//= require jquery3\n//= require rails-ujs"
+  )
+  gsub_file('app/assets/javascripts/application.js',
+            %r{^//= require rails-ujs\n}, "//= require rails-ujs\n//= "\
+            "require twitter/bootstrap\n")
 end
 # font-awesome-rails | icons
 if yes?('Install font-awesome-rails icons?')
