@@ -50,6 +50,32 @@ end
 #
 
 #
+# Access Control
+#
+gem 'pundit'
+generate 'pundit:install'
+gsub_file(
+  'app/controllers/application_controller.rb',
+  %r{^end\n}, %(  include Pundit
+  protect_from_forgery with: :exception
+  # Require a User to be logged in for every action by default.
+  before_action :authenticate_user!
+  # Rescue from unauthorized with an error.
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
+  ##
+  # Forward the unauthorized user to the previous page or the home page of the
+  # application.
+  #
+  def user_not_authorized
+    flash[:alert] = t(:error_not_authorized)
+    redirect_to(request.referer || root_path)
+  end
+end
+)
+)
+
+#
 # Authentication
 #
 gem 'devise'
@@ -58,15 +84,13 @@ model_name = ask('What would you like the user model to be called? [User]')
 model_name = 'User' if model_name.blank?
 generate 'devise', model_name
 generate 'controller', model_name.pluralize
+gsub_file(
+  'config/routes.rb',
+  %r{devise_for :users}, "devise_for :users\n  resources :users"
+)
 generate 'devise:views' if installed_bootstrap
 generate 'bootstrap:themed', model_name.pluralize if installed_bootstrap
 generate 'pundit:policy', model_name.pluralize
-
-#
-# Access Control
-#
-gem 'pundit'
-generate 'pundit:install'
 
 #
 # Require SSL in Production
