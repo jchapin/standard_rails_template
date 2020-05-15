@@ -286,8 +286,6 @@ gem_group :development, :test do
   # Remove SQLite from ALL environments. Only want it in development and test.
   gsub_file 'Gemfile', /^# Use sqlite3 as the database for Active Record\n/, ''
   gsub_file 'Gemfile', /^gem 'sqlite3'\n/, ''
-  # Add SQLite to development and test.
-  gem 'sqlite3', '< 1.4.0'
 end
 
 # Rubocop Configuration File
