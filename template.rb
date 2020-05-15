@@ -293,7 +293,7 @@ create_file 'config/rubocop.yml', "AllCops:
   Exclude:
     - 'db/**/*'
     - 'bin/*'
-  TargetRubyVersion: 2.3\n"
+  TargetRubyVersion: 2.7\n"
 
 # Alter Rakefile to include ci_reporter_minitest
 gsub_file('Rakefile', "require_relative 'config/application'\n",
