@@ -38,7 +38,7 @@ if yes?('Install font-awesome-rails icons?')
   gem 'font-awesome-rails'
   gsub_file(
     'app/assets/stylesheets/application.css',
-    %r{^ \*= require_tree \.}, " *= require_tree .\n *= require font-awesome"
+    /^ \*= require_tree \./, " *= require_tree .\n *= require font-awesome"
   )
 end
 # kaminari | pagination
@@ -58,7 +58,7 @@ gem 'pundit'
 generate 'pundit:install'
 gsub_file(
   'app/controllers/application_controller.rb',
-  %r{^end\n}, %(  include Pundit
+  /^end\n/, %(  include Pundit
   protect_from_forgery with: :exception
   # Require a User to be logged in for every action by default.
   before_action :authenticate_user!
@@ -88,7 +88,7 @@ generate 'devise', model_name
 generate 'controller', model_name.pluralize
 gsub_file(
   'config/routes.rb',
-  %r{devise_for :users}, "devise_for :users\n  resources :users"
+  /devise_for :users/, "devise_for :users\n  resources :users"
 )
 generate 'devise:views' if installed_bootstrap
 generate 'bootstrap:themed', model_name.pluralize if installed_bootstrap
@@ -98,8 +98,8 @@ generate 'pundit:policy', model_name.pluralize
 # Require SSL in Production
 #
 gsub_file(
-  'config/environments/production.rb', %r{# config\.force_ssl = true},
-  "config.force_ssl = true"
+  'config/environments/production.rb', /# config\.force_ssl = true/,
+  'config.force_ssl = true'
 )
 
 #
@@ -137,9 +137,7 @@ gem 'city-state' if yes?('Install city-state gem?')
 gem 'cocoon' if yes?('Install cocoon gem for associated model forms?')
 # Delayed Job Queue
 installed_delayed_job = yes?('Install basic delayed_job queue?')
-if installed_delayed_job
-  gem 'delayed_job_active_record'
-end
+gem 'delayed_job_active_record' if installed_delayed_job
 # A simple ActiveRecord mixin to add conventions for flagging records as
 # discarded.
 gem 'discard' if yes?('Install discard gem for, "soft deletes"?')
