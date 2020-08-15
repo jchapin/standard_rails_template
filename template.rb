@@ -315,6 +315,10 @@ append_file('.gitignore', "\n# Ignore Test Coverage Report Directory
 append_file('.gitignore', "\n# Ignore development and test environment files
 .env\n")
 
+# Procfile - Process File
+create_file 'Procfile', "web: bundle exec puma -C config/puma.rb
+worker: bundle exec rake jobs:work"
+
 #
 # Test Only -
 #
